@@ -28,7 +28,13 @@ function App() {
         <button onClick={searchGame}>Search Game Title</button>
         <div className="games">
           {searchedGames.map((game, key) => {
-            return <div className="game" key={key}>{game.external} </div>
+            return (
+              <div className="game" key={key}>
+                {game.external}
+                <img src={game.thumb} />
+                ${game.cheapest}
+              </div>
+            );
           })}
         </div>
       </div>
