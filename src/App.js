@@ -1,9 +1,10 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [gameTitle, setGameTitle] = useState("");
   const [searchedGames, setSearchedGames] = useState([]);
+  const [gameDeals, setGameDeals] = useState([]);
 
   const searchGame = () => {
     fetch(`https://www.cheapshark.com/api/1.0/games?title=${gameTitle}&limit=3`)
@@ -13,6 +14,17 @@ function App() {
         setSearchedGames(data);
       });
   };
+
+  useEffect(() => {
+    fetch("https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=20&pageSize=3")
+    .then((response) => response.json())
+    .then((data)=> {
+      console.log(data);
+      setGameDeals(data);
+    })
+    
+  }, [])
+  
 
   return (
     <div className="App">
@@ -40,6 +52,11 @@ function App() {
       </div>
       <div className="dealsSection">
         <h1>Latest Deals</h1>
+        {gameDeals.map((game, key) =>{
+          return (
+            <h1 key={key}>{game.title} </h1>
+          )
+        })}
       </div>
     </div>
   );
