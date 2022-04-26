@@ -51,12 +51,19 @@ function App() {
         </div>
       </div>
       <div className="dealsSection">
-        <h1>Latest Deals</h1>
-        {gameDeals.map((game, key) =>{
+        <h1 className="h1">Latest Deals</h1>
+        <div className="games">
+            {gameDeals.map((game, key) =>{
           return (
-            <h1 key={key}>{game.title} </h1>
+            <div className="game" id="deals" key={key}>
+              <h3>{game.title}</h3>
+              <p>Normal Price: ${game.normalPrice}</p>
+              <p>Deal Price: ${game.salePrice}</p>
+              <h3>YOU SAVE {game.savings.substr(0, 2)}% </h3>
+            </div>
           )
         })}
+        </div>
       </div>
     </div>
   );
